@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="RobotGUI2009_guidesign" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/RobotGUI2009_guidesign" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/RobotGUI2009_guidesign" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs`" />
+		</Linker>
+		<Unit filename="RobotGUI2009_guidesignApp.cpp" />
+		<Unit filename="RobotGUI2009_guidesignApp.h" />
+		<Unit filename="RobotGUI2009_guidesignMain.cpp" />
+		<Unit filename="RobotGUI2009_guidesignMain.h" />
+		<Unit filename="wxsmith/RobotGUI2009_guidesignframe.wxs" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="RobotGUI2009_guidesignApp.cpp" main="RobotGUI2009_guidesignFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/RobotGUI2009_guidesignframe.wxs" src="RobotGUI2009_guidesignMain.cpp" hdr="RobotGUI2009_guidesignMain.h" name="RobotGUI2009_guidesignFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
