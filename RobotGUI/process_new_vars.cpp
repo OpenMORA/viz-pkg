@@ -184,8 +184,9 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 
 		if (idx<m_gl_robot_lasers.size() && m_gl_robot_lasers[idx]->isVisible())
 		{
-			CSerializablePtr obj;
-			mrpt::utils::StringToObject(value, obj);
+			mrpt::utils::CSerializablePtr obj;
+			//mrpt::utils::StringToObject(value, obj);  (deprecated) CGenericSensor now employs ObjectToOctetVector() to serialize objects to strings
+			mrpt::utils::RawStringToObject(value, obj);
 			if (IS_CLASS(obj, CObservation2DRangeScan))
 			{
 				if (m_scan[idx].present())
