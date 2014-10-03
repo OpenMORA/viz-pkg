@@ -79,8 +79,9 @@ bool RobotGUI2009_guidesignApp::OnInit()
 	m_theFrame->Show();
 	SetTopWindow(m_theFrame);
 	//m_theFrame->Notebook2->ChangeSelection(2);
-	m_theFrame->SetWindowStyleFlag( m_theFrame->GetWindowStyleFlag() | wxSTAY_ON_TOP);
-
+	//m_theFrame->SetWindowStyleFlag( m_theFrame->GetWindowStyleFlag() | wxSTAY_ON_TOP);
+	m_theFrame->SetWindowStyleFlag( m_theFrame->GetWindowStyleFlag() | wxMAXIMIZE);
+	
     // launch MOOS APP thread:
 	m_moos_thread = mrpt::system::createThreadFromObjectMethod(this,&RobotGUI2009_guidesignApp::moos_app_thread);
 

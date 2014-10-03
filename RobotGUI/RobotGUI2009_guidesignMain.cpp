@@ -903,6 +903,8 @@ void RobotGUI2009_guidesignFrame::OnStopNavigator(wxCommandEvent& event)
 	CCriticalSectionLocker lock(& m_theWxApp->m_lstToSendToMOOS_cs );
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG3D_CMD"),string("CANCEL")));
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG_CMD"),string("CANCEL")));
+	//JGMonroy
+	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("CANCEL_NAVIGATION"),string("1")));
 }
 
 void RobotGUI2009_guidesignFrame::OntimUpdateFromMOOSTrigger(wxTimerEvent& event)
