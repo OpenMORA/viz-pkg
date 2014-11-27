@@ -36,8 +36,10 @@ bool GUIMOOSApp::DoRegistrations()
 {
 	//! @moos_subscribe	JOYSTICK_MODE
 	//! @moos_publish	JOYSTICK_MODE A string either "0" or "1" to enable manual control with a Joystick
-
 	AddMOOSVariable_OpenMORA("JOYSTICK_MODE", 0);
+
+	//! @moos_subscribe	RANDOM_NAVIGATOR
+	AddMOOSVariable_OpenMORA("RANDOM_NAVIGATOR", 0);
 
 	//! @moos_subscribe LOCALIZATION, LOCALIZATION_COV, LOCALIZATION_PARTICLES
 	AddMOOSVariable_OpenMORA("LOCALIZATION", ROBOTGUI_MAIN_SCREEN_REFRESH_PERIOD);
@@ -179,10 +181,12 @@ bool GUIMOOSApp::DoRegistrations()
 
 	AddMOOSVariable_OpenMORA("GRAPH",  0);
 
-	AddMOOSVariable_OpenMORA("BATTERY_V",0);
-	AddMOOSVariable_OpenMORA("Battery_Level",0);
-	AddMOOSVariable_OpenMORA("Is_Charging",0);
-	AddMOOSVariable_OpenMORA("Battery1_Voltage",0);
+	AddMOOSVariable_OpenMORA("BATTERY_V",0);			//Battery of the robot base
+	AddMOOSVariable_OpenMORA("BATTERY_IS_CHARGING",0);	//Battery of the robot base
+
+	AddMOOSVariable_OpenMORA("BATTERY_MANAGER_V",0);			//Battery monitored by the Battery_Manager module
+	AddMOOSVariable_OpenMORA("BATTERY_MANAGER_IS_CHARGING",0);	//Battery monitored by the Battery_Manager module
+	AddMOOSVariable_OpenMORA("BATTERY_MANAGER_LEVEL",0);		//Battery monitored by the Battery_Manager module
 
 	AddMOOSVariable_OpenMORA("FBUMPERS",0);
 	AddMOOSVariable_OpenMORA("WIFI_POWER",0);

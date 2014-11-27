@@ -119,6 +119,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
 		std::vector<double> data2_x,data2_y;
 
 		kwxLCDDisplay *lcdtext1;
+		kwxLCDDisplay *lcdtext2;
 
    private:
 
@@ -244,6 +245,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         static const long ID_GLOBAL_GLCANVAS;
         static const long ID_PANEL5;
         static const long ID_STATICTEXT1;
+		static const long ID_STATICTEXT5;
         static const long ID_STATICTEXT4;
         static const long ID_TEXTCTRL1;
         static const long ID_PANEL6;
@@ -261,6 +263,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         static const long ID_TIMER1;
         static const long ID_TIMER2;
 		static const long ID_BUTTONBATTERY;
+		static const long ID_BUTTONBATTERY2;
 
         //*)
 
@@ -279,6 +282,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         wxCustomButton* btnResetSimul;
         wxSplitterWindow* SplitterWindow2;
         wxStaticText* StaticTextBattery;
+		wxStaticText* StaticTextBattery2;
         wxPanel* Panel9;
         wxListBox* lstCurPlan;
         wxPanel* Panel8;
@@ -287,6 +291,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         wxStaticText* StaticText3;
         wxCustomButton* btnSaveTopo;
 		wxCustomButton* btnBattery;
+		wxCustomButton* btnBattery2;
         wxPanel* Panel6;
         wxPanel* Panel3;
         wxStaticLine* StaticLine4;

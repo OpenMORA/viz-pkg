@@ -95,6 +95,7 @@ const long RobotGUI2009_guidesignFrame::ID_STATICTEXT2 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_GLOBAL_GLCANVAS = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_PANEL5 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_STATICTEXT1 = wxNewId();
+const long RobotGUI2009_guidesignFrame::ID_STATICTEXT5 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_STATICTEXT4 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_TEXTCTRL1 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_PANEL6 = wxNewId();
@@ -112,6 +113,7 @@ const long RobotGUI2009_guidesignFrame::ID_STATUSBAR1 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_TIMER1 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_TIMER2 = wxNewId();
 const long RobotGUI2009_guidesignFrame::ID_BUTTONBATTERY = wxNewId();
+const long RobotGUI2009_guidesignFrame::ID_BUTTONBATTERY2 = wxNewId();
 
 
 // NEW STATE CHARTS EDITOR
@@ -346,10 +348,15 @@ RobotGUI2009_guidesignFrame::RobotGUI2009_guidesignFrame(RobotGUI2009_guidesignA
     FlexGridSizer8 = new wxFlexGridSizer(3, 2, 0, 0);
     FlexGridSizer8->AddGrowableCol(1);
     FlexGridSizer8->AddGrowableRow(1);
-    StaticTextBattery = new wxStaticText(Panel6, ID_STATICTEXT1, _("Battery Level: N/A"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+
+    StaticTextBattery = new wxStaticText(Panel6, ID_STATICTEXT1, _("Battery base: N/A"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));	
     FlexGridSizer8->Add(StaticTextBattery, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 	btnBattery=new wxCustomButton(Panel6,ID_BUTTONBATTERY,_(""),wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL")),wxART_MAKE_CLIENT_ID_FROM_STR(wxString(wxEmptyString))),wxDefaultPosition,wxDefaultSize,wxBORDER_NONE,wxDefaultValidator,_T("ID_BUTTONBATTERY"));
 	FlexGridSizer8->Add(btnBattery,1,0,0);
+	StaticTextBattery2 = new wxStaticText(Panel6, ID_STATICTEXT5, _("Battery ext: N/A"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
+	FlexGridSizer8->Add(StaticTextBattery2, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
+	btnBattery2=new wxCustomButton(Panel6,ID_BUTTONBATTERY2,_(""),wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL")),wxART_MAKE_CLIENT_ID_FROM_STR(wxString(wxEmptyString))),wxDefaultPosition,wxDefaultSize,wxBORDER_NONE,wxDefaultValidator,_T("ID_BUTTONBATTERY2"));
+	FlexGridSizer8->Add(btnBattery2,1,0,0);
 
     StaticText4 = new wxStaticText(Panel6, ID_STATICTEXT4, _("System messages:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
     FlexGridSizer8->Add(StaticText4, 1, wxALL|wxALIGN_TOP|wxALIGN_CENTER_HORIZONTAL, 5);
@@ -441,7 +448,7 @@ RobotGUI2009_guidesignFrame::RobotGUI2009_guidesignFrame(RobotGUI2009_guidesignA
 	bat_plot2->Refresh();
 
 	lcdtext1=new kwxLCDDisplay(battery_management, wxPoint(100,400),wxSize(200,100));
-
+	lcdtext2=new kwxLCDDisplay(battery_management, wxPoint(600,400),wxSize(200,100));
 
     // NEW STATE CHARTS EDIT SECTION
 
@@ -858,7 +865,7 @@ RobotGUI2009_guidesignFrame::~RobotGUI2009_guidesignFrame()
 
 void RobotGUI2009_guidesignFrame::OnQuit(wxCommandEvent& event)
 {
-	//Send Command to disconnect from Pioneer Base
+	//Send Command to disconnect all OpenMORA modules
 	CCriticalSectionLocker lock(& m_theWxApp->m_lstToSendToMOOS_cs );
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("SHUTDOWN"),string("true")) );
 	delete boardSCE;
@@ -904,7 +911,7 @@ void RobotGUI2009_guidesignFrame::OnStopNavigator(wxCommandEvent& event)
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG3D_CMD"),string("CANCEL")));
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG_CMD"),string("CANCEL")));
 	//JGMonroy
-	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("CANCEL_NAVIGATION"),string("1")));
+	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("CANCEL_NAVIGATION"),string("1.0")));	
 }
 
 void RobotGUI2009_guidesignFrame::OntimUpdateFromMOOSTrigger(wxTimerEvent& event)

@@ -189,7 +189,11 @@ bool GUIMOOSApp::Iterate()
 			m_theWxApp->m_lstToSendToMOOS.pop();
 
 			// Send to MOOS:
-			m_Comms.Notify(d.first,d.second);
+			if( d.first=="CANCEL_NAVIGATION" )
+				m_Comms.Notify(d.first,atof(d.second.c_str()));		//Send as a Float MOOS variable
+			else
+				m_Comms.Notify(d.first,d.second);
+
 //			cout << "Sending to MOOS: " << d.first << " -> " << d.second << endl;
 		}
 	}

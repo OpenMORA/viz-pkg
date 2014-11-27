@@ -607,92 +607,124 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 
 
 	}
-	else if (var =="BATTERY_V")
+	else if (var =="BATTERY_V")		//Battery voltage of the robot base
 	{
-		//Updating the battery level
-
-		CSerializablePtr batt_obj;
-		StringToObject(value,batt_obj);
+		CSerializablePtr batt_obj;		
+		mrpt::utils::RawStringToObject(value,batt_obj);
 		double voltios;
 		voltios=((mrpt::slam::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
-		StaticTextBattery->SetLabel(wxString::Format(_("Battery Level: %.2f"),voltios));
 
+		//Update indicator on main viewport
+		StaticTextBattery->SetLabel(wxString::Format(_("Battery base: %.2f"),voltios));
 
+		//Update graph (Battery Manager tab, first plot)
 		static mrpt::system::TTimeStamp starttime=mrpt::system::getCurrentLocalTime();
+		mrpt::system::TTimeStamp tt=mrpt::system::getCurrentLocalTime();
+		double elapse=mrpt::system::timeDifference(starttime,tt);
 
+		data_x.push_back(elapse);
+		data_y.push_back(voltios);
+		bat_data->SetData(data_x,data_y);
+		bat_data->SetContinuity(true);
+		wxPen vectorpen(*wxBLUE, 0.5, wxSOLID);
+		bat_data->SetPen(vectorpen);
+		bat_data->SetDrawOutsideMargins(false);
+		bat_plot1->Refresh();
+		if (data_x.size()<100)
+			bat_plot1->Fit();
+		else 
+			bat_plot1->SetPosX(elapse-20);
+
+		if (voltios<11)
+			this->edSystemLog->AppendText( _U(format("Critical base battery level\n").c_str()));
+
+		//Set value on LCD display
+		lcdtext1->SetValue( _U(format("%.2f",voltios).c_str()));
+		lcdtext1->Refresh();
+	}
+
+	else if (var=="BATTERY_IS_CHARGING")	//Battery of the robot base
+	{
+		if (atof(value.c_str())>0.0)
+		{
+			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_CHARGING"))));
+			charging=true;
+		}
+		else
+		{
+			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL"))));
+			charging=false;			
+		}
+	}
+
+	else if (var=="BATTERY_MANAGER_V")		//External Battery (monitored by the BatteryManager module)
+	{
+		CSerializablePtr batt_obj;		
+		mrpt::utils::RawStringToObject(value,batt_obj);
+		double voltios;
+		voltios=((mrpt::slam::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
+
+		//Update indicator on main viewport
+		StaticTextBattery2->SetLabel(wxString::Format(_("Battery ext: %.2f"),voltios));
+
+		//Update graph (Battery Manager tab, second plot)
+		static mrpt::system::TTimeStamp starttime=mrpt::system::getCurrentLocalTime();
 		mrpt::system::TTimeStamp tt=mrpt::system::getCurrentLocalTime();
 		double elapse=mrpt::system::timeDifference(starttime,tt);
 
 		data2_x.push_back(elapse);
 		data2_y.push_back(voltios);
-
-		bat_data2->SetData(data2_x,data2_y);bat_data2->SetContinuity(true);
+		bat_data2->SetData(data2_x,data2_y);
+		bat_data2->SetContinuity(true);
 		wxPen vectorpen(*wxBLUE, 0.5, wxSOLID);
 		bat_data2->SetPen(vectorpen);
 		bat_data2->SetDrawOutsideMargins(false);
 		bat_plot2->Refresh();
 		if (data2_x.size()<100)
 			bat_plot2->Fit();
-		else bat_plot2->SetPosX(elapse-20);
+		else
+			bat_plot2->SetPosX(elapse-20);		
 
 		if (voltios<11)
-			this->edSystemLog->AppendText( _U(format("Critical battery level\n").c_str()));
+			this->edSystemLog->AppendText( _U(format("Critical external battery  level\n").c_str()));
+
+		//Set value on LCD display
+		lcdtext2->SetValue( _U(format("%.2f",voltios).c_str()));
+		lcdtext2->Refresh();
 	}
-	else if (var=="Is_Charging")
+
+	else if (var=="BATTERY_MANAGER_IS_CHARGING")	//External Battery
 	{
-		if (atof(value.c_str())>0)
-			{
-				btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_CHARGING"))));
-				charging=true;
-			}
-		else charging=false;
+		if (atof(value.c_str())>0.0)
+		{
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_CHARGING"))));
+			charging=true;
+		}
+		else
+		{
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL"))));
+			charging=false;			
+		}
 	}
-	else if (var=="Battery1_Voltage") //Battery level of the Sancho's computer
-	{
-		static mrpt::system::TTimeStamp starttime=mrpt::system::getCurrentLocalTime();
 
-		mrpt::system::TTimeStamp tt=mrpt::system::getCurrentLocalTime();
-		double elapse=mrpt::system::timeDifference(starttime,tt);
-
-		data_x.push_back(elapse);
-		data_y.push_back(atof(value.c_str()));
-
-		bat_data->SetData(data_x,data_y);bat_data->SetContinuity(true);
-		wxPen vectorpen(*wxBLUE, 0.5, wxSOLID);
-		bat_data->SetPen(vectorpen);
-		bat_data->SetDrawOutsideMargins(false);
-		bat_plot1->Refresh();
-
-		if (data_x.size()<100)
-			bat_plot1->Fit();
-		else bat_plot1->SetPosX(elapse-20);
-
-		lcdtext1->SetValue( _U(format("%.2f",atof(value.c_str())).c_str()));
-
-		lcdtext1->Refresh();
-
-
-
-	}
-	else if (var=="Battery_Level" && !charging)
+	else if (var=="BATTERY_MANAGER_LEVEL" && !charging)
 	{
 		if (atof(value.c_str()) >80)
 		{
-			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL"))));
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_FULL"))));
 		}
 		else if (atof(value.c_str()) >50)
 		{
-			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_L2"))));
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_L2"))));
 		}
 		else if (atof(value.c_str()) >30)
 		{
-			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_L1"))));
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_L1"))));
 		}
 		else if (atof(value.c_str()) >10)
 		{
-			btnBattery->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_DEAD"))));
+			btnBattery2->SetBitmapLabel(wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("BATTERY_DEAD"))));
 		}
-
 	}
 
 	else if (var=="GUI_SET_CAMERA")
