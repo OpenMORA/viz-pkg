@@ -911,7 +911,7 @@ void RobotGUI2009_guidesignFrame::OnStopNavigator(wxCommandEvent& event)
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG3D_CMD"),string("CANCEL")));
 	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("PNAVIGATORREACTIVEPTG_CMD"),string("CANCEL")));
 	//JGMonroy
-	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("CANCEL_NAVIGATION"),string("1.0")));	
+	m_theWxApp->m_lstToSendToMOOS.push( make_pair(string("CANCEL_NAVIGATION"),string("GUI - Stop button")));	
 }
 
 void RobotGUI2009_guidesignFrame::OntimUpdateFromMOOSTrigger(wxTimerEvent& event)
@@ -1097,14 +1097,14 @@ void RobotGUI2009_guidesignFrame::OnplotMouseClick(wxMouseEvent& event)
 
 	default:
 			// Do normal process in that class:
-			m_glMap->OnLeftDown(event);
+			m_glMap->OnMouseDown(event);			
 	}
 
 	m_glMap->SetCursor( *wxSTANDARD_CURSOR ); // End of cross cursor
 	m_cursorPickState = cpsNone; // end of mode
 
 	// Do normal process in that class:
-	m_glMap->OnLeftDown(event);
+	m_glMap->OnMouseDown(event);
 }
 void RobotGUI2009_guidesignFrame::sendTopologyEdditNodeToMOOS(const mrpt::math::TPoint2D &trg)
 {
