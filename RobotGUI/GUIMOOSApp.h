@@ -32,7 +32,6 @@
 
 #include <COpenMORAMOOSApp.h>
 #include <mrpt/gui.h>
-//#include <mrpt/maps.h>
 #include <mrpt/hwdrivers/CJoystick.h>
 #include "CVirtualWorld.hpp"
 

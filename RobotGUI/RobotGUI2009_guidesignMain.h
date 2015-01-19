@@ -38,8 +38,8 @@
 #include <mrpt/opengl/CPlanarLaserScan.h>
 #include <mrpt/opengl/CText.h>
 #include <mrpt/opengl/CDisk.h>
-#include <mrpt/slam/COccupancyGridMap2D.h>
-#include <mrpt/slam/CSimplePointsMap.h>
+#include <mrpt/maps/COccupancyGridMap2D.h>
+#include <mrpt/maps/CSimplePointsMap.h>
 
 
 //(*Headers(RobotGUI2009_guidesignFrame)
@@ -330,12 +330,12 @@ class RobotGUI2009_guidesignFrame: public wxFrame
           *  as it's modified from the main wx thread.
           */
         mrpt::opengl::CSetOfObjectsPtr 						m_gl_robot;  //!< The group of robot 3D objects
-		CPose2D												newP;		//pose of the robot
+		mrpt::poses::CPose2D												newP;		//pose of the robot
         mrpt::opengl::CSetOfObjectsPtr 						m_gl_robot_model;  //!< The 3D robot itself, which goes into m_gl_robot
-		std::vector<mrpt::slam::CObservation2DRangeScanPtr>	m_scan;		//To reduce the delay effect
+		std::vector<mrpt::obs::CObservation2DRangeScanPtr>	m_scan;		//To reduce the delay effect
 		std::vector<mrpt::opengl::CPlanarLaserScanPtr> 		m_gl_robot_lasers;
 		//mrpt::opengl::CPointCloudColouredPtr 				m_gl_robot_kinect;
-		mrpt::slam::CSimplePointsMap						m_theMap;	//To reduce the delay effect (kinect points)
+		mrpt::maps::CSimplePointsMap						m_theMap;	//To reduce the delay effect (kinect points)
 		mrpt::opengl::CPointCloudPtr 						m_gl_robot_kinect;
 		mrpt::opengl::CPlanarLaserScanPtr					m_gl_robot_kinect_2D_scan;
         mrpt::opengl::CPointCloudPtr 						m_gl_parts;
@@ -361,7 +361,7 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         mrpt::opengl::CSetOfObjectsPtr 		m_gl_placing_nav_target;
         mrpt::opengl::CSetOfObjectsPtr 		m_gl_relocalizing_area;
 
-        mrpt::slam::COccupancyGridMap2D		m_curmap_grid; //!< The last grid map received from wherever.
+        mrpt::maps::COccupancyGridMap2D		m_curmap_grid; //!< The last grid map received from wherever.
 
 		mrpt::opengl::CTextPtr				m_gl_battery_level_text;
 

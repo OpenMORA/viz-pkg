@@ -37,10 +37,10 @@
 #include <mrpt/opengl/CSetOfLines.h>
 #include <mrpt/opengl/CSimpleLine.h>
 
-#include <mrpt/slam/CObservation2DRangeScan.h>
-#include <mrpt/slam/CObservation3DRangeScan.h>
-#include <mrpt/slam/CObservationRange.h>
-#include <mrpt/slam/CObservationBatteryState.h>
+#include <mrpt/obs/CObservation2DRangeScan.h>
+#include <mrpt/obs/CObservation3DRangeScan.h>
+#include <mrpt/obs/CObservationRange.h>
+#include <mrpt/obs/CObservationBatteryState.h>
 
 #include <mrpt/utils/CFileGZInputStream.h>
 
@@ -60,9 +60,10 @@ using namespace mrpt;
 using namespace mrpt::synch;
 using namespace mrpt::math;
 using namespace mrpt::utils;
-using namespace mrpt::slam;
 using namespace mrpt::poses;
 using namespace mrpt::opengl;
+using namespace mrpt::obs;
+using namespace mrpt::maps;
 
 
 
@@ -224,7 +225,7 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 			mrpt::utils::StringToObject(value, obj);
 			if (IS_CLASS(obj, CSimplePointsMap))
 			{
-				mrpt::slam::CSimplePointsMap gridmap;
+				mrpt::maps::CSimplePointsMap gridmap;
 				gridmap = *CSimplePointsMapPtr(obj);
 				m_gl_gridpoints->clear();
 				m_gl_gridpoints->loadFromPointsMap( &gridmap );
@@ -612,7 +613,7 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 		CSerializablePtr batt_obj;		
 		mrpt::utils::RawStringToObject(value,batt_obj);
 		double voltios;
-		voltios=((mrpt::slam::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
+		voltios=((mrpt::obs::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
 
 		//Update indicator on main viewport
 		StaticTextBattery->SetLabel(wxString::Format(_("Battery base: %.2f"),voltios));
@@ -662,7 +663,7 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 		CSerializablePtr batt_obj;		
 		mrpt::utils::RawStringToObject(value,batt_obj);
 		double voltios;
-		voltios=((mrpt::slam::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
+		voltios=((mrpt::obs::CObservationBatteryStatePtr)batt_obj)->voltageMainRobotBattery;
 
 		//Update indicator on main viewport
 		StaticTextBattery2->SetLabel(wxString::Format(_("Battery ext: %.2f"),voltios));

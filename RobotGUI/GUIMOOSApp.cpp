@@ -45,7 +45,6 @@
 using namespace std;
 
 using namespace mrpt;
-using namespace mrpt::slam;
 using namespace mrpt::utils;
 using namespace mrpt::synch;
 using namespace mrpt::gui;
