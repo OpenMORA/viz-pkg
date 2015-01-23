@@ -739,14 +739,14 @@ RobotGUI2009_guidesignFrame::RobotGUI2009_guidesignFrame(RobotGUI2009_guidesignA
 		m_gl_robot->insert(m_gl_robot_lasers[i]);   // Lasers go onboard the robot
 	}
 
-	//Kinect
-	//m_gl_robot_kinect = opengl::CPointCloudColoured::Create();
-	m_gl_robot_kinect = opengl::CPointCloud::Create();
-	m_gl_robot_kinect->setColor(0,0.7,0);
-	m_gl_robot_kinect->setPointSize( 3.0 );
-	m_gl_robot->insert( m_gl_robot_kinect );
-	m_gl_robot_kinect_2D_scan = opengl::CPlanarLaserScan::Create();
-	m_gl_robot->insert( m_gl_robot_kinect_2D_scan );
+	//Range camera
+	//m_gl_robot_rangecam = opengl::CPointCloudColoured::Create();
+	m_gl_robot_rangecam = opengl::CPointCloud::Create();
+	m_gl_robot_rangecam->setColor(0,0.7,0);
+	m_gl_robot_rangecam->setPointSize( 3.0 );
+	m_gl_robot->insert( m_gl_robot_rangecam );
+	m_gl_robot_rangecam_2D_scan = opengl::CPlanarLaserScan::Create();
+	m_gl_robot->insert( m_gl_robot_rangecam_2D_scan );
 
 	//GridPoints
 	m_gl_gridpoints = opengl::CPointCloud::Create();
@@ -822,7 +822,7 @@ RobotGUI2009_guidesignFrame::RobotGUI2009_guidesignFrame(RobotGUI2009_guidesignA
 	this->addObjectToListOfVisibleCheckboxs("LASER1",m_gl_robot_lasers[0], true);
 	this->addObjectToListOfVisibleCheckboxs("LASER2",m_gl_robot_lasers[1], true);
 	this->addObjectToListOfVisibleCheckboxs("LASER3",m_gl_robot_lasers[2], false);
-	this->addObjectToListOfVisibleCheckboxs("KINECT1",m_gl_robot_kinect, true);
+	this->addObjectToListOfVisibleCheckboxs("RANGECAM1",m_gl_robot_rangecam, true);
 	this->addObjectToListOfVisibleCheckboxs("SONAR1",m_gl_sonars[0], false);
 	this->addObjectToListOfVisibleCheckboxs("SONAR2",m_gl_sonars[1], false);
 	this->addObjectToListOfVisibleCheckboxs("INFRARED1",m_gl_sonars[2], false);

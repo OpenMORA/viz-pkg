@@ -334,10 +334,10 @@ class RobotGUI2009_guidesignFrame: public wxFrame
         mrpt::opengl::CSetOfObjectsPtr 						m_gl_robot_model;  //!< The 3D robot itself, which goes into m_gl_robot
 		std::vector<mrpt::obs::CObservation2DRangeScanPtr>	m_scan;		//To reduce the delay effect
 		std::vector<mrpt::opengl::CPlanarLaserScanPtr> 		m_gl_robot_lasers;
-		//mrpt::opengl::CPointCloudColouredPtr 				m_gl_robot_kinect;
-		mrpt::maps::CSimplePointsMap						m_theMap;	//To reduce the delay effect (kinect points)
-		mrpt::opengl::CPointCloudPtr 						m_gl_robot_kinect;
-		mrpt::opengl::CPlanarLaserScanPtr					m_gl_robot_kinect_2D_scan;
+		//mrpt::opengl::CPointCloudColouredPtr 				m_gl_robot_rangecam;
+		mrpt::maps::CSimplePointsMap						m_theMap;	//To reduce the delay effect (rangecam points)
+		mrpt::opengl::CPointCloudPtr 						m_gl_robot_rangecam;
+		mrpt::opengl::CPlanarLaserScanPtr					m_gl_robot_rangecam_2D_scan;
         mrpt::opengl::CPointCloudPtr 						m_gl_parts;
 		std::vector<mrpt::opengl::CSetOfObjectsPtr> 		m_gl_sonars;  //!< Sonars and IRs
 		mrpt::opengl::CPointCloudPtr						m_gl_gridpoints;

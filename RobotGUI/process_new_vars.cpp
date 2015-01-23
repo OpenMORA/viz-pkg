@@ -198,9 +198,9 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 			}
 		}
 	}
-	else if(var=="KINECT1")
+	else if(var=="RANGECAM1")
 	{
-		if (m_gl_robot_kinect->isVisible())
+		if (m_gl_robot_rangecam->isVisible())
 		{
 			CSerializablePtr obj;
 			mrpt::utils::StringToObject(value, obj);
@@ -208,8 +208,8 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 			{
 				if (m_theMap.size() != 0)
 				{
-					m_gl_robot_kinect->clear();
-					m_gl_robot_kinect->loadFromPointsMap( &m_theMap );
+					m_gl_robot_rangecam->clear();
+					m_gl_robot_rangecam->loadFromPointsMap( &m_theMap );
 				}
 				m_theMap = *CSimplePointsMapPtr(obj);
 
@@ -239,10 +239,10 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 	//		CObservation3DRangeScanPtr scan = CObservation3DRangeScanPtr(obj);
 	//		CSimplePointsMap theMap;
 	//		theMap.insertObservationPtr( scan );
-	//		m_gl_robot_kinect->clear();
-	//		m_gl_robot_kinect->loadFromPointsMap( &theMap );
-	//		m_gl_robot_kinect->setColor( 0, 1, 0 );
-	//		m_gl_robot_kinect->setPointSize( 3.0 );
+	//		m_gl_robot_rangecam->clear();
+	//		m_gl_robot_rangecam->loadFromPointsMap( &theMap );
+	//		m_gl_robot_rangecam->setColor( 0, 1, 0 );
+	//		m_gl_robot_rangecam->setPointSize( 3.0 );
 
 	//		m_refresh_3d = true;
 	//	}
@@ -251,17 +251,17 @@ void RobotGUI2009_guidesignFrame::processNewMOOSVar(const std::string &var, cons
 	//		/*CObservation2DRangeScanPtr scan = CObservation2DRangeScanPtr(obj);
 	//		CSimplePointsMap theMap;
 	//		theMap.insertObservationPtr( scan );
-	//		m_gl_robot_kinect->clear();
-	//		m_gl_robot_kinect->loadFromPointsMap( &theMap );
-	//		m_gl_robot_kinect->setColor( 0, 1, 0 );
-	//		m_gl_robot_kinect->setPointSize( 3.0 );
+	//		m_gl_robot_rangecam->clear();
+	//		m_gl_robot_rangecam->loadFromPointsMap( &theMap );
+	//		m_gl_robot_rangecam->setColor( 0, 1, 0 );
+	//		m_gl_robot_rangecam->setPointSize( 3.0 );
 
 	//		m_refresh_3d = true;*/
 
-	//		m_gl_robot_kinect_2D_scan->setVisibility();
+	//		m_gl_robot_rangecam_2D_scan->setVisibility();
 
 	//		CObservation2DRangeScanPtr scan = CObservation2DRangeScanPtr(obj);
-	//		m_gl_robot_kinect_2D_scan->setScan(*scan);
+	//		m_gl_robot_rangecam_2D_scan->setScan(*scan);
 	//		m_refresh_3d = true;
 	//	}
 	//}
